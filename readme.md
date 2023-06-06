@@ -83,7 +83,7 @@ Lastly, we plot the raw data for initial inspection. This plot allows us to see 
 
 Let's create the MNE Raw object and visualize the data:
 
-<span style="color:#1496BB">Question: What are some benefits of visually inspecting your raw data before performing any preprocessing steps?</span>
+`Question: What are some benefits of visually inspecting your raw data before performing any preprocessing steps?`
 
 
 ```python
