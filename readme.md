@@ -60,7 +60,7 @@ We'll start by loading the raw EEG data and the information about the channel lo
 
 We first specify the directory path where our EEG data files are located. In this example, it's stored in the `DATA_PATH` variable.
 
-Next, we look for all files in that directory that end with the extension '.vhdr' (these are Brain Vision data files). We select the first file found with this extension. This will be the file we load for our analysis.
+Next, we look for all files in that directory that end with the extension '.vhdr' (these are Brain Vision header files). We select the first file found with this extension. This will be the file we load for our analysis.
 
 Here's how you can do it:
 
