@@ -1,4 +1,4 @@
-# TMS-EEG Cleaning/Preprocessing Tutorial
+# TMS-EEG Preprocessing Python Tutorial
 
 Welcome to this tutorial on preprocessing EEG data! This guide is designed to help those familiar with EEG and TMS/EEG concepts, but who may be new to Python programming. We're going to walk through the preprocessing steps needed to transform raw TMS/EEG data into a format ready for further analysis.
 
