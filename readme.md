@@ -83,7 +83,7 @@ Lastly, we plot the raw data for initial inspection. This plot allows us to see 
 
 Let's create the MNE Raw object and visualize the data:
 
-`Question: What are some benefits of visually inspecting your raw data before performing any preprocessing steps?`
+> Question: What are some benefits of visually inspecting your raw data before performing any preprocessing steps?
 
 
 ```python
@@ -116,7 +116,7 @@ Before removing artifacts from our data, we first need to handle the events embe
 
 In our case, we'll extract all events from the raw data annotations and keep only those with event code 1128.
 
-<span style="color:#1496BB">Question: In an event-related design, such as TMS/EEG protocols, precise event timing is critical for subsequent analysis. What challenges might you encounter in aligning the events from the stimulus presentation system with the EEG data, and how might you overcome these challenges?</span>
+>Question: In an event-related design, such as TMS/EEG protocols, precise event timing is critical for subsequent analysis. What challenges might you encounter in aligning the events from the stimulus presentation system with the EEG data, and how might you overcome these challenges?
 
 **Remove TMS Pulse Artifacts**
 
@@ -132,7 +132,7 @@ We then apply this function to our raw data using MNE-Python's `apply_function` 
 
 Let's handle the events and remove the TMS pulse artifacts:
 
-<span style="color:#1496BB">Question: Considering the broad range of potential artifacts in EEG data (such as those from eye movements, muscle activity, and external electrical noise), how might you approach identifying which artifact is causing an issue in your dataset? What strategies might you use to separate artifact from true neural signal?</span>
+>Question: Considering the broad range of potential artifacts in EEG data (such as those from eye movements, muscle activity, and external electrical noise), how might you approach identifying which artifact is causing an issue in your dataset? What strategies might you use to separate artifact from true neural signal?
 
 
 ```python
@@ -201,7 +201,7 @@ raw.pick('eeg').apply_function(remove_tms_pulse_artifact, onsets=events[:, 0], i
 
 Before we proceed to segment the continuous EEG data into epochs, we first need to preprocess the data. The steps involve detrending and filtering. Detrending is to remove the linear trend from the data, filtering is to keep the frequency content of the data within a desired range.
 
-<span style="color:#1496BB">Question: Why might it be important to detrend and/or filter our data before proceeding with further analysis? What could be the potential impacts of the data if we don't do this preprocessing step?</span>
+>Question: Why might it be important to detrend and/or filter our data before proceeding with further analysis? What could be the potential impacts of the data if we don't do this preprocessing step?
 
 
 ```python
@@ -216,7 +216,7 @@ raw.filter(l_freq=1, h_freq=None, method='iir')
 
 Now that our data are in a cleaner state, we can proceed to segment the continuous EEG data into epochs, which are shorter segments of data surrounding an event of interest.
 
-<span style="color:#1496BB">Question: Why do we divide our continuous EEG data into epochs? How would you decide the suitable time window for epoching?</span>
+>Question: Why do we divide our continuous EEG data into epochs? How would you decide the suitable time window for epoching?
 
 
 ```python
@@ -246,7 +246,7 @@ In our case, we will interpolate the bad channels.
 
 Remember: Always consider the impact of your decisions at this stage on the later stages of your analysis pipeline. This will help to ensure the integrity and reproducibility of your results.
 
-<span style="color:#1496BB">Question: One of the key challenges in EEG analysis is deciding how to handle bad channels and trials. If you discover that a significant proportion of your data is "bad" (e.g., more than 30% of your channels or trials), how might this influence your analysis strategy? Would you reconsider your experimental protocol or the data acquisition setup? Why or why not?</span>
+>Question: One of the key challenges in EEG analysis is deciding how to handle bad channels and trials. If you discover that a significant proportion of your data is "bad" (e.g., more than 30% of your channels or trials), how might this influence your analysis strategy? Would you reconsider your experimental protocol or the data acquisition setup? Why or why not?
 
 
 ```python
@@ -262,7 +262,7 @@ After segmenting the continuous EEG data into epochs, we will perform additional
 - Downsampling: Downsampling is a process of reducing the sampling rate of the signal. This reduces the size of the data and can improve computational efficiency in subsequent analyses. Note that downsampling should only be done after applying a low-pass filter to prevent aliasing.
 - Cropping: Finally, we crop our epochs. This process trims the epoch window to a specified length. In our case, we are keeping a time window from -0.6 to 0.6 seconds around the event. Cropping can be particularly helpful in removing edge artifacts that might have been introduced during filtering.
 
-<span style="color:#1496BB">Question: The trade-off between data integrity and computational efficiency is a common challenge in EEG analysis. For instance, downsampling reduces data size and computational load but might also eliminate potentially valuable high-frequency information. Similarly, cropping epochs can remove edge artifacts, but also reduces the temporal context for each epoch. Given these trade-offs, how would you approach the decision-making process when setting parameters such as filter cut-offs, downsampling rates, and crop intervals? How might your specific research question influence these decisions?</span>
+>Question: The trade-off between data integrity and computational efficiency is a common challenge in EEG analysis. For instance, downsampling reduces data size and computational load but might also eliminate potentially valuable high-frequency information. Similarly, cropping epochs can remove edge artifacts, but also reduces the temporal context for each epoch. Given these trade-offs, how would you approach the decision-making process when setting parameters such as filter cut-offs, downsampling rates, and crop intervals? How might your specific research question influence these decisions?
 
 Here is the Python code that implements these steps:
 
@@ -282,7 +282,7 @@ epochs = epochs.crop(-0.6, 0.6)
 
 EEG signals are always recorded as a difference between two electrodes, the 'active' electrode and the 'reference' electrode. The choice of reference can have a significant impact on the recorded EEG signals. Here, we re-reference the EEG data to the average of all electrodes.
 
-<span style="color:#1496BB">Question: What is the significance of re-referencing in EEG data analysis? How might different reference choices influence the analysis results?</span>
+>Question: What is the significance of re-referencing in EEG data analysis? How might different reference choices influence the analysis results?
 
 
 ```python
@@ -295,7 +295,7 @@ epochs.apply_proj();
 
 Baseline correction is a standard processing step in EEG analysis that adjusts the data based on the average signal value during a baseline period. Here, we use the period from -600 ms to -1 ms as the baseline.
 
-<span style="color:#1496BB">Question: What is the purpose of applying a baseline correction in EEG analysis? What factors would you consider when selecting the baseline period?</span>
+>Question: What is the purpose of applying a baseline correction in EEG analysis? What factors would you consider when selecting the baseline period?
 
 
 ```python
@@ -307,7 +307,7 @@ epochs.apply_baseline((-0.6, -0.001), verbose=True);
 
 Occasionally, some channels may provide poor quality signals due to various reasons, such as poor contact with the scalp or hardware problems. In such cases, we can interpolate these bad channels using the signals from the surrounding good channels.
 
-<span style="color:#1496BB">Question: What are some potential causes of 'bad' channels in EEG data? How does the interpolation of bad channels help in EEG data analysis?</span>
+>Question: What are some potential causes of 'bad' channels in EEG data? How does the interpolation of bad channels help in EEG data analysis?
 
 
 ```python
@@ -321,7 +321,7 @@ epochs.interpolate_bads(reset_bads=True, verbose=True)
 
 Finally, we compute the average of all epochs to create an evoked response, which represents the brain's average response to the given event. We then plot the evoked response and its topographic representation.
 
-<span style="color:#1496BB">Question: What information can the evoked response provide us in an event-related potential study? Why do we take an average across trials to create an evoked response?</span>
+>Question: What information can the evoked response provide us in an event-related potential study? Why do we take an average across trials to create an evoked response?
 
 
 ```python
