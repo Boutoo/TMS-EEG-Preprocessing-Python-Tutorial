@@ -334,5 +334,3 @@ evoked.plot_joint(topomap_args=dict(cmap='jet'));
 By the end of this notebook you should be able to obtain clear `mne.Epochs` and `mne.Evoked` objects and a figure that represents the preprocessed TMS Evoked Potential as below.
 
 ![Evoked Potential](./evoked_example.png)
-
-
