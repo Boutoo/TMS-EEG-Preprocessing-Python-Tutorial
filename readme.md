@@ -48,10 +48,6 @@ from scipy import interpolate
 
 import os
 from scipy.io import loadmat
-
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('Qt5Agg')
 ```
 
 ## Step 2: Find EEG Data Path
